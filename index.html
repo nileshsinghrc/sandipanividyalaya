@@ -434,11 +434,255 @@ footer>*{max-width:var(--page-max);margin-left:auto;margin-right:auto;}
 #donate-success p{font-size:14px;color:var(--ink-soft);line-height:1.6;max-width:360px;}
 #donate-form-wrap{display:block;}
 #donate-form-wrap.hide{display:none;}
+
+/* ════════════════════════════════
+   CMS AUTH OVERLAY
+════════════════════════════════ */
+#cms-auth-overlay{
+  position:fixed;inset:0;z-index:99999;
+  background:rgba(26,31,46,0.72);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity 0.25s;
+}
+#cms-auth-overlay.open{opacity:1;pointer-events:all;}
+#cms-auth-box{
+  background:white;border-radius:24px;width:100%;max-width:380px;
+  box-shadow:0 24px 80px rgba(0,0,0,0.3);overflow:hidden;
+  transform:translateY(20px) scale(0.97);transition:transform 0.25s;
+}
+#cms-auth-overlay.open #cms-auth-box{transform:none;}
+.auth-head{
+  background:var(--ink);padding:28px 28px 20px;text-align:center;
+}
+.auth-head .auth-icon{font-size:36px;margin-bottom:10px;}
+.auth-head h2{font-family:'Fredoka One',cursive;font-size:22px;color:white;margin-bottom:4px;}
+.auth-head p{font-size:12px;color:rgba(255,255,255,0.5);}
+.auth-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:14px;}
+.auth-field{display:flex;flex-direction:column;gap:5px;}
+.auth-field label{font-size:12px;font-weight:800;color:var(--ink-soft);}
+.auth-input-wrap{position:relative;display:flex;align-items:center;}
+.auth-input-wrap input{
+  width:100%;border:2px solid #e0e0e0;border-radius:10px;
+  padding:11px 40px 11px 14px;font-family:'Nunito',sans-serif;font-size:14px;
+  color:var(--ink);outline:none;transition:border-color 0.15s;
+}
+.auth-input-wrap input:focus{border-color:var(--sky);}
+.auth-eye{position:absolute;right:12px;cursor:pointer;font-size:16px;color:#aaa;user-select:none;}
+.auth-error{
+  background:#fff0f0;border:1.5px solid #ffc5c5;border-radius:8px;
+  padding:9px 12px;font-size:12px;font-weight:700;color:var(--berry);
+  display:none;align-items:center;gap:6px;
+}
+.auth-error.show{display:flex;}
+.auth-submit{
+  background:var(--sky);color:white;border:none;border-radius:12px;
+  padding:13px;font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;
+  cursor:pointer;transition:all 0.15s;box-shadow:0 4px 14px rgba(59,174,232,0.35);
+}
+.auth-submit:hover{background:#2a9fd6;transform:translateY(-1px);}
+.auth-hint{font-size:11px;color:#aaa;text-align:center;line-height:1.6;}
+.cms-logout-btn{
+  background:none;border:1px solid rgba(255,255,255,0.2);border-radius:6px;
+  color:rgba(255,255,255,0.6);font-size:10px;font-weight:800;padding:3px 8px;
+  cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;
+}
+.cms-logout-btn:hover{border-color:var(--berry);color:var(--berry);}
+.cms-user-badge{
+  display:flex;align-items:center;gap:6px;
+  font-size:10px;color:rgba(255,255,255,0.5);
+}
+.cms-user-badge span{color:rgba(255,255,255,0.8);font-weight:800;}
+
+/* ════════════════════════════════
+   TEACHERS SECTION
+════════════════════════════════ */
+.teachers-section{background:var(--white);}
+.teachers-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:20px;
+}
+.teacher-card{
+  background:white;border:2px solid #f0e8df;border-radius:var(--radius);
+  padding:24px 16px;text-align:center;
+  cursor:pointer;transition:transform 0.18s,border-color 0.18s,box-shadow 0.18s;
+  position:relative;overflow:hidden;
+}
+.teacher-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--sky),var(--grass));
+  transform:scaleX(0);transition:transform 0.25s;transform-origin:left;
+}
+.teacher-card:hover{transform:translateY(-4px);border-color:var(--sky);box-shadow:0 8px 24px rgba(59,174,232,0.14);}
+.teacher-card:hover::before{transform:scaleX(1);}
+.teacher-photo{
+  width:88px;height:88px;border-radius:50%;
+  background:linear-gradient(135deg,#B3E5FC,#81D4FA);
+  margin:0 auto 14px;display:flex;align-items:center;justify-content:center;
+  font-size:36px;border:3px solid white;
+  box-shadow:0 3px 14px rgba(59,174,232,0.2);overflow:hidden;
+}
+.teacher-photo img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+.teacher-name{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px;line-height:1.3;}
+.teacher-subject{font-size:12px;font-weight:800;color:var(--sky);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.teacher-exp{font-size:11px;color:var(--ink-soft);margin-bottom:10px;}
+.teacher-bio{font-size:12px;color:var(--ink-soft);line-height:1.6;display:none;}
+.teacher-card:hover .teacher-bio{display:block;}
+.teacher-tag{
+  display:inline-block;font-size:10px;font-weight:800;
+  padding:3px 10px;border-radius:50px;
+  background:#E8F7FF;color:#1a7fb0;margin-top:6px;
+}
+
+/* ════════════════════════════════
+   MOBILE RESPONSIVE  (≤768px)
+════════════════════════════════ */
+@media(max-width:768px){
+  :root{--page-pad:16px;}
+
+  /* Nav */
+  nav{height:auto;padding:10px 16px;position:sticky;top:0;z-index:100;}
+  .nav-inner{flex-wrap:wrap;gap:10px;}
+  .nav-logo-area{flex:1;gap:8px;}
+  .logo-box{width:38px;height:38px;font-size:18px;}
+  .partner-box{height:34px;min-width:40px;max-width:70px;}
+  .nav-school-name{font-size:14px;}
+  .nav-links{
+    order:3;width:100%;overflow-x:auto;padding-bottom:4px;
+    gap:2px;-webkit-overflow-scrolling:touch;
+  }
+  .nav-links::-webkit-scrollbar{height:0;}
+  .nav-links a{font-size:11px;padding:5px 8px;white-space:nowrap;}
+  .logo-divider{display:none;}
+
+  /* Hero */
+  .hero{padding:28px 16px 0;min-height:auto;}
+  .hero-inner{grid-template-columns:1fr;gap:20px;}
+  .hero h1{font-size:28px;}
+  .hero p{font-size:14px;max-width:100%;}
+  .hero-visual{justify-content:center;}
+  .hero-photo-slot{width:100%;max-width:100%;height:220px;border-radius:16px;}
+  .hero-photo-slot img#hero-preview{border-radius:14px;}
+
+  /* Mentor */
+  .mentor-section{padding:28px 16px;}
+  .mentor-inner{grid-template-columns:1fr;gap:20px;padding:24px 18px;}
+  .mentor-avatar-wrap{width:100%;flex-direction:row;gap:14px;align-items:flex-start;}
+  .mentor-avatar{width:80px;height:80px;flex-shrink:0;}
+  .mentor-name{font-size:13px;text-align:left;}
+  .mentor-title-badge{text-align:left;}
+  .mentor-stars{justify-content:flex-start;}
+  .mentor-content h2{font-size:18px;}
+  .mentor-content blockquote{font-size:13px;padding-left:12px;}
+  .mentor-sig{flex-direction:column;gap:6px;align-items:flex-start;}
+
+  /* Sections */
+  section{padding:32px 16px;}
+  .section-title{font-size:22px;}
+  .section-header{flex-direction:column;align-items:flex-start;gap:6px;margin-bottom:18px;}
+
+  /* Gallery */
+  .gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:120px 120px 120px;gap:8px;}
+  .gallery-item:first-child{grid-row:span 1;grid-column:span 2;}
+
+  /* Events */
+  .events-grid{grid-template-columns:1fr;gap:12px;}
+
+  /* Donate+Volunteer */
+  .two-col-grid{grid-template-columns:1fr;gap:16px;}
+  .volunteer-slots{grid-template-columns:1fr 1fr;}
+
+  /* Teachers */
+  .teachers-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .teacher-card{padding:16px 10px;}
+  .teacher-photo{width:68px;height:68px;font-size:28px;}
+  .teacher-name{font-size:13px;}
+
+  /* Resources */
+  .resources-grid{grid-template-columns:1fr 1fr;gap:10px;}
+
+  /* Footer */
+  .footer-grid{grid-template-columns:1fr;gap:20px;}
+
+  /* Admissions */
+  .admissions-inner{grid-template-columns:1fr;gap:20px;}
+  .steps-row{gap:6px;}
+  .step-pill{font-size:11px;padding:6px 10px;}
+  .admissions-cta-box{min-width:auto;padding:18px;}
+
+  /* CMS Panel */
+  #cms-panel{
+    right:0;left:0;bottom:0;width:100%;max-height:75vh;
+    border-radius:20px 20px 0 0;
+  }
+  #cms-toggle{bottom:16px;right:16px;width:48px;height:48px;font-size:20px;}
+
+  /* Modals */
+  #apply-modal,#donate-modal{border-radius:20px 20px 0 0;}
+  #apply-overlay,#donate-overlay{align-items:flex-end;padding:0;}
+  .apply-modal-body,.donate-modal-body{padding:18px 18px 28px;}
+  .apply-grid{grid-template-columns:1fr;}
+  .donate-amounts{grid-template-columns:repeat(3,1fr);}
+  .donate-methods{grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:400px){
+  .teachers-grid{grid-template-columns:1fr;}
+  .resources-grid{grid-template-columns:1fr;}
+  .donate-amounts{grid-template-columns:repeat(2,1fr);}
+  .gallery-mosaic{grid-template-columns:1fr;grid-template-rows:repeat(5,130px);}
+  .gallery-item:first-child{grid-column:span 1;}
+  .nav-school-name{font-size:12px;}
+}
+
+/* iOS safe-area support */
+@supports(padding-bottom:env(safe-area-inset-bottom)){
+  #cms-toggle{bottom:calc(16px + env(safe-area-inset-bottom));}
+  #cms-panel{padding-bottom:env(safe-area-inset-bottom);}
+  footer{padding-bottom:calc(24px + env(safe-area-inset-bottom));}
+}
+
+/* Touch improvements */
+@media(hover:none){
+  .teacher-bio{display:block;}
+  .teacher-card{transform:none!important;}
+  .gallery-item:hover .gallery-bg{transform:none;}
+  .btn-primary:hover,.btn-outline:hover,.btn-sun:hover,.btn-grass:hover{transform:none;}
+}
 </style>
 </head>
 <body>
 
-<!-- ════════ CMS TOGGLE BUTTON ════════ -->
+<!-- ════════ CMS AUTH OVERLAY ════════ -->
+<div id="cms-auth-overlay">
+  <div id="cms-auth-box">
+    <div class="auth-head">
+      <div class="auth-icon">🔐</div>
+      <h2>CMS Login</h2>
+      <p>Enter your admin credentials to access the editor</p>
+    </div>
+    <div class="auth-body">
+      <div class="auth-field">
+        <label>Username</label>
+        <div class="auth-input-wrap">
+          <input type="text" id="auth-user" placeholder="admin" autocomplete="username"
+            onkeydown="if(event.key==='Enter')document.getElementById('auth-pass').focus()">
+        </div>
+      </div>
+      <div class="auth-field">
+        <label>Password</label>
+        <div class="auth-input-wrap">
+          <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password"
+            onkeydown="if(event.key==='Enter')submitAuth()">
+          <span class="auth-eye" onclick="toggleAuthPw()" id="auth-eye-icon">👁</span>
+        </div>
+      </div>
+      <div class="auth-error" id="auth-error">⚠️ Incorrect username or password</div>
+      <button class="auth-submit" onclick="submitAuth()">Login to CMS →</button>
+      <p class="auth-hint">Default credentials: <strong>admin / sandipani2025</strong><br>Change these in the source code before deploying.</p>
+    </div>
+  </div>
+</div>
 <button id="cms-toggle" onclick="toggleCMS()" title="Open CMS Editor">⚙️</button>
 
 <!-- ════════ CMS PANEL ════════ -->
@@ -446,9 +690,12 @@ footer>*{max-width:var(--page-max);margin-left:auto;margin-right:auto;}
   <div id="cms-head" style="position:relative;">
     <div>
       <h2>⚙️ Live CMS Editor</h2>
-      <span>Changes update the page instantly</span>
+      <div class="cms-user-badge">Logged in as <span id="cms-username-disp">admin</span></div>
     </div>
-    <div class="save-notice" id="saveNotice">✓ Saved</div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="save-notice" id="saveNotice">✓ Saved</div>
+      <button class="cms-logout-btn" onclick="logoutCMS()">Logout</button>
+    </div>
   </div>
 
   <div class="cms-tabs">
@@ -461,6 +708,7 @@ footer>*{max-width:var(--page-max);margin-left:auto;margin-right:auto;}
     <button class="ct" onclick="showTab('school')">🏫 School Info</button>
     <button class="ct" onclick="showTab('applyform')">📋 Apply Form</button>
     <button class="ct" onclick="showTab('donateform')">💰 Donate Form</button>
+    <button class="ct" onclick="showTab('teachers')">👩‍🏫 Teachers</button>
   </div>
 
   <div id="cms-body">
@@ -530,7 +778,7 @@ footer>*{max-width:var(--page-max);margin-left:auto;margin-right:auto;}
       </div>
       <div class="cg">
         <div class="cg-title">👤 Details</div>
-        <div class="cf"><label>Full Name</label><input type="text" id="m1-name" value="Shri Chandra Bhushan Sharma" oninput="applyMentor(1)"></div>
+        <div class="cf"><label>Full Name</label><input type="text" id="m1-name" value="Prof. (Dr.) Chandra Bhushan Sharma" oninput="applyMentor(1)"></div>
         <div class="cf"><label>Title / Role</label><input type="text" id="m1-title" value="Mentor" oninput="applyMentor(1)"></div>
         <div class="cf"><label>Section Tag</label><input type="text" id="m1-tag" value="💬 Message from the Mentor" oninput="applyMentor(1)"></div>
         <div class="cf"><label>Heading</label><input type="text" id="m1-heading" value="A Warm Welcome to SANDIPANI VIDYALAYA" oninput="applyMentor(1)"></div>
@@ -675,6 +923,16 @@ Grade 5</textarea></div>
       </div>
     </div>
 
+    <!-- ── TEACHERS TAB ── -->
+    <div class="cp" id="tab-teachers">
+      <div class="cg">
+        <div class="cg-title">👩‍🏫 Manage Teachers</div>
+        <p style="font-size:11px;color:#888;line-height:1.5;">Add, edit or remove teacher profiles shown on the homepage. Each card shows photo, name, subject and bio.</p>
+      </div>
+      <div id="teachers-editor"></div>
+      <button class="add-ev-btn" onclick="addTeacher()" style="margin-top:4px;">+ Add Teacher</button>
+    </div>
+
   </div><!-- /cms-body -->
 </div><!-- /cms-panel -->
 
@@ -746,7 +1004,7 @@ Grade 5</textarea></div>
         <div class="mentor-avatar" onclick="document.querySelector('#tab-mentor1 input[type=file]').click()" title="Click to change photo">
           <img id="m1-photo" src="https://www.vbu.ac.in/resources/assets/images/dr_chandra.jpg" alt="Mentor 1">
         </div>
-        <div class="mentor-name" id="m1-name-disp">Shri Chandra Bhushan Sharma</div>
+        <div class="mentor-name" id="m1-name-disp">Prof. (Dr.) Chandra Bhushan Sharma</div>
         <div class="mentor-title-badge" id="m1-title-disp">Mentor</div>
         <div class="mentor-stars">⭐⭐⭐⭐⭐</div>
       </div>
@@ -756,7 +1014,7 @@ Grade 5</textarea></div>
         <blockquote id="m1-msg-disp">Dear Parents, Students, and Friends of SANDIPANI VIDYALAYA — <strong>welcome to our little corner of the world where every child matters.</strong> We believe that education is not just about academics, but about nurturing curiosity, kindness, and the confidence to dream big. Our dedicated teachers and staff work tirelessly every single day to create a safe, joyful, and inspiring environment where children don't just learn — <strong>they truly flourish.</strong> Whether you are a new family joining us or a returning one, we are honored to be part of your child's journey. Together, let's make this year extraordinary.</blockquote>
         <div class="mentor-sig">
           <div class="mentor-sig-line"></div>
-          <span id="m1-sig-disp">Shri Chandra Bhushan Sharma — Vice Chancellor, Vinoba Bhave University, Hazaribag, Jharkhand</span>
+          <span id="m1-sig-disp">Prof. (Dr.) Chandra Bhushan Sharma — Vice Chancellor, Vinoba Bhave University, Hazaribag, Jharkhand</span>
           <a id="m1-url-disp" href="https://www.vbu.ac.in/administrative" target="_blank">View Profile →</a>
         </div>
       </div>
@@ -874,6 +1132,18 @@ Grade 5</textarea></div>
     <div class="resource-card"><div class="resource-icon ri-berry">📅</div><h4>Academic Calendar</h4><p>Holidays, exams &amp; important dates</p></div>
     <div class="resource-card"><div class="resource-icon ri-sun">📝</div><h4>Homework Help</h4><p>Worksheets &amp; study guides</p></div>
   </div>
+</section>
+
+<!-- TEACHERS -->
+<section class="teachers-section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag sky">👩‍🏫 Our Team</div>
+      <div class="section-title">Meet Our Teachers</div>
+      <div class="section-sub">Passionate educators dedicated to nurturing every child's potential.</div>
+    </div>
+  </div>
+  <div class="teachers-grid" id="teachers-display"></div>
 </section>
 
 <!-- FOOTER -->
@@ -1506,6 +1776,180 @@ function submitDonateForm() {
 // ══════════════════════════════════════
 renderEvents();
 renderVolSlots();
+renderTeachers();
+
+// ══════════════════════════════════════
+// CMS AUTHENTICATION
+// ══════════════════════════════════════
+const CMS_CREDENTIALS = { admin: 'sandipani2025' }; // Change before deploying!
+let cmsAuthenticated = false;
+
+function toggleCMS() {
+  if (!cmsAuthenticated) {
+    openAuthOverlay();
+    return;
+  }
+  const p = document.getElementById('cms-panel');
+  const t = document.getElementById('cms-toggle');
+  p.classList.toggle('open');
+  t.classList.toggle('open');
+  t.textContent = p.classList.contains('open') ? '✕' : '⚙️';
+}
+
+function openAuthOverlay() {
+  document.getElementById('cms-auth-overlay').classList.add('open');
+  document.getElementById('auth-user').focus();
+  document.getElementById('auth-error').classList.remove('show');
+  document.getElementById('auth-user').value = '';
+  document.getElementById('auth-pass').value = '';
+}
+
+function closeAuthOverlay() {
+  document.getElementById('cms-auth-overlay').classList.remove('open');
+}
+
+function submitAuth() {
+  const user = document.getElementById('auth-user').value.trim();
+  const pass = document.getElementById('auth-pass').value;
+  const errEl = document.getElementById('auth-error');
+
+  if (CMS_CREDENTIALS[user] && CMS_CREDENTIALS[user] === pass) {
+    cmsAuthenticated = true;
+    errEl.classList.remove('show');
+    closeAuthOverlay();
+    document.getElementById('cms-username-disp').textContent = user;
+    // Open the panel
+    const p = document.getElementById('cms-panel');
+    const t = document.getElementById('cms-toggle');
+    p.classList.add('open');
+    t.classList.add('open');
+    t.textContent = '✕';
+  } else {
+    errEl.classList.add('show');
+    document.getElementById('auth-pass').value = '';
+    document.getElementById('auth-pass').focus();
+    // Shake animation
+    const box = document.getElementById('cms-auth-box');
+    box.style.animation = 'none';
+    box.offsetHeight; // reflow
+    box.style.animation = 'shake 0.4s ease';
+  }
+}
+
+function logoutCMS() {
+  cmsAuthenticated = false;
+  const p = document.getElementById('cms-panel');
+  const t = document.getElementById('cms-toggle');
+  p.classList.remove('open');
+  t.classList.remove('open');
+  t.textContent = '⚙️';
+}
+
+function toggleAuthPw() {
+  const inp = document.getElementById('auth-pass');
+  const icon = document.getElementById('auth-eye-icon');
+  if (inp.type === 'password') { inp.type = 'text'; icon.textContent = '🙈'; }
+  else { inp.type = 'password'; icon.textContent = '👁'; }
+}
+
+// ══════════════════════════════════════
+// TEACHERS
+// ══════════════════════════════════════
+const avatarColors = [
+  'linear-gradient(135deg,#B3E5FC,#81D4FA)',
+  'linear-gradient(135deg,#C8E6C9,#A5D6A7)',
+  'linear-gradient(135deg,#F8BBD0,#F48FB1)',
+  'linear-gradient(135deg,#FFE0B2,#FFCC80)',
+  'linear-gradient(135deg,#E1BEE7,#CE93D8)',
+  'linear-gradient(135deg,#B2EBF2,#80DEEA)',
+];
+const avatarEmojis = ['👩‍🏫','👨‍🏫','👩‍🔬','👨‍🔬','👩‍🎨','👨‍🎨','👩‍💻','👨‍💻','👩‍📚','👨‍📚'];
+
+const state_teachers = [
+  { name:'Mrs. Priya Sharma', subject:'Mathematics', exp:'12 years experience', bio:'Specializes in making complex concepts simple and fun for young learners.', tag:'Class Teacher — Grade 4', photo:'', emoji:'👩‍🏫', color:0 },
+  { name:'Mr. Rajesh Verma', subject:'Science', exp:'8 years experience', bio:'Brings the lab to life with hands-on experiments and real-world examples.', tag:'Science Department', photo:'', emoji:'👨‍🔬', color:1 },
+  { name:'Mrs. Anita Gupta', subject:'English Language', exp:'15 years experience', bio:'Passionate about literature, storytelling and building strong communication skills.', tag:'Language Arts Lead', photo:'', emoji:'👩‍📚', color:2 },
+  { name:'Mr. Sunil Mishra', subject:'Social Studies', exp:'10 years experience', bio:'Connects history and geography to students\' everyday lives.', tag:'Class Teacher — Grade 3', photo:'', emoji:'👨‍🏫', color:3 },
+  { name:'Mrs. Kavita Singh', subject:'Arts & Craft', exp:'6 years experience', bio:'Nurtures creativity and self-expression through every project.', tag:'Arts Department', photo:'', emoji:'👩‍🎨', color:4 },
+  { name:'Mr. Arun Kumar', subject:'Physical Education', exp:'9 years experience', bio:'Builds teamwork, discipline and healthy habits through sport.', tag:'Sports & Wellness', photo:'', emoji:'🏃', color:5 },
+];
+
+function renderTeachers() {
+  // Website display
+  const grid = document.getElementById('teachers-display');
+  if (grid) {
+    grid.innerHTML = state_teachers.map((t, i) => `
+      <div class="teacher-card">
+        <div class="teacher-photo" style="background:${avatarColors[t.color % avatarColors.length]}">
+          ${t.photo ? `<img src="${t.photo}" alt="${t.name}">` : `<span style="font-size:36px">${t.emoji}</span>`}
+        </div>
+        <div class="teacher-name">${t.name}</div>
+        <div class="teacher-subject">${t.subject}</div>
+        <div class="teacher-exp">${t.exp}</div>
+        <div class="teacher-bio">${t.bio}</div>
+        <div class="teacher-tag">${t.tag}</div>
+      </div>`).join('');
+  }
+
+  // CMS editor
+  const ed = document.getElementById('teachers-editor');
+  if (!ed) return;
+  ed.innerHTML = state_teachers.map((t, i) => `
+    <div class="cg" style="margin-bottom:10px;">
+      <div class="ev-item-head">
+        <div class="ev-item-title">${t.emoji} ${t.name}</div>
+        <button class="ev-del" onclick="deleteTeacher(${i})">✕</button>
+      </div>
+      <div class="thumb-row" style="margin-bottom:6px;">
+        <div style="width:44px;height:44px;border-radius:50%;background:${avatarColors[t.color % avatarColors.length]};display:flex;align-items:center;justify-content:center;font-size:22px;overflow:hidden;flex-shrink:0;">
+          ${t.photo ? `<img src="${t.photo}" style="width:100%;height:100%;object-fit:cover;">` : t.emoji}
+        </div>
+        <label class="photo-upload-btn" style="flex:1;font-size:11px;">
+          📁 Upload Photo
+          <input type="file" accept="image/*" onchange="uploadTeacherPhoto(event,${i})">
+        </label>
+      </div>
+      <div class="cf"><label>Full Name</label><input type="text" value="${t.name}" oninput="state_teachers[${i}].name=this.value;renderTeachers()"></div>
+      <div class="crow">
+        <div class="cf"><label>Subject</label><input type="text" value="${t.subject}" oninput="state_teachers[${i}].subject=this.value;renderTeachers()"></div>
+        <div class="cf"><label>Experience</label><input type="text" value="${t.exp}" oninput="state_teachers[${i}].exp=this.value;renderTeachers()"></div>
+      </div>
+      <div class="cf"><label>Short Bio</label><textarea oninput="state_teachers[${i}].bio=this.value;renderTeachers()" style="min-height:50px;">${t.bio}</textarea></div>
+      <div class="cf"><label>Tag / Role</label><input type="text" value="${t.tag}" oninput="state_teachers[${i}].tag=this.value;renderTeachers()"></div>
+      <div class="cf"><label>Avatar Emoji</label>
+        <select onchange="state_teachers[${i}].emoji=this.value;renderTeachers()">
+          ${avatarEmojis.map(e => `<option value="${e}" ${e===t.emoji?'selected':''}>${e}</option>`).join('')}
+        </select>
+      </div>
+    </div>`).join('');
+}
+
+function uploadTeacherPhoto(event, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    state_teachers[idx].photo = e.target.result;
+    renderTeachers();
+    flashSave();
+  };
+  reader.readAsDataURL(file);
+}
+
+function deleteTeacher(i) { state_teachers.splice(i,1); renderTeachers(); flashSave(); }
+function addTeacher() {
+  state_teachers.push({
+    name:'New Teacher', subject:'Subject', exp:'X years experience',
+    bio:'Tell us about this teacher\'s approach and expertise.',
+    tag:'Department', photo:'', emoji:'👩‍🏫',
+    color: state_teachers.length % avatarColors.length
+  });
+  renderTeachers(); flashSave();
+}
 </script>
+
+<style>
+@keyframes shake{0%,100%{transform:none}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+</style>
 </body>
 </html>
